@@ -3,17 +3,25 @@ import { useEffect, useState } from 'react';
 
 import WeatherForm from './WeatherForm';
 import Weather from './Weather';
+import { stringify } from 'querystring';
 
 function App() {
 
-  const [currentCity, setCurrentCity] = useState<string>('Paris')
+  const [currentCity, setCurrentCity] = useState<string>('Montreuil')
   const [lat, setLat] = useState<number>()
   const [lon, setLon] = useState<number>()
   const [description, setDescription] = useState<string>('')
   const [temperature, setTemperature] = useState<number>()
 
+  // const successCallback = () => {
+  //   console.log("requete réussie")
+  // }
 
-  useEffect( () => {
+  // const failureCallback = () => {
+  //   return <h2>Impossible de trouver la ville</h2>
+  // }
+
+  useEffect(() => {
     fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + currentCity + '&limit=1&appid=5f9a2b6e96d642eca0ad699f9dddac4e')
     .then(response => response.json())
     .then(data => {
@@ -27,18 +35,18 @@ function App() {
     .then(
       data => {
         console.log(data)
-        setDescription(data.weather[0].description)
+        setDescription( String(data.weather[0].description) )
         setTemperature(data.main.temp)
-        console.log(typeof(currentCity))
+        console.log(description)
       }
     )
   })
 
   return (
     <div className="App">
-      <WeatherForm />
+      <WeatherForm setCurrentCity={setCurrentCity} />
       <h1>{currentCity}</h1>
-      <Weather temperature={temperature} description={description} currentCity={currentCity}  />
+      <Weather temperature={temperature} description={String({description})} currentCity={currentCity}  />
 
     </div>
   );
