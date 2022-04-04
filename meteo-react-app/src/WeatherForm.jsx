@@ -1,13 +1,13 @@
 import {useState} from 'react'
 
-function WeatherForm( {setCurrentCity}: any) {
+function WeatherForm( {setCurrentCity}) {
 
-  const [newCity, setNewCity] = useState<string>("second")
+  const [newCity, setNewCity] = useState("")
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event => {
     event.preventDefault();
     setCurrentCity(newCity)
-  }
+  })
 
   return (
     <div>
