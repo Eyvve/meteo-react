@@ -46,7 +46,7 @@ function App() {
     <div className="App">
       <WeatherForm setCurrentCity={setCurrentCity} />
       <h1>{currentCity}</h1>
-      <Weather temperature={temperature} description={String({description})} currentCity={currentCity}  />
+      <Weather temperature={temperature} description={description} currentCity={currentCity}  />
 
     </div>
   );
