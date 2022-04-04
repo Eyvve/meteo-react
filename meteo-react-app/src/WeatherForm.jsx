@@ -1,12 +1,18 @@
 import {useState} from 'react'
 
-function WeatherForm( {setCurrentCity}) {
+function WeatherForm( {setCurrentCity, handleUpdate}) {
 
   const [newCity, setNewCity] = useState("")
 
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   const handleSubmit = (event => {
     event.preventDefault();
-    setCurrentCity(newCity)
+    setCurrentCity(capitalizeFirstLetter(newCity))
+    {handleUpdate()}
   })
 
   return (
